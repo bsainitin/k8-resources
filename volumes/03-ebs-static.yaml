@@ -1,6 +1,6 @@
 # Creating PV is K8 Admin Job
 apiVersion: v1
-kind: persistentVolume
+kind: PersistentVolume
 metadata:
   name: ebs-static
 spec:
