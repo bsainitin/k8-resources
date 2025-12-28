@@ -9,14 +9,28 @@ spec:
   replicas: 5
   selector:
     matchLabels:
-      purpose: dp-demo
+      purpose: headless-svc-demo
       project: roboshop
   template:
     metadata:
       labels:
-        purpose: dp-demo
+        purpose: headless-svc-demo
         project: roboshop
     spec:
       containers:
       - name: nginx
-        image: nginx:alpine
+        image: nginx:latest
+---
+apiVersion: v1 
+kind: service
+metadata:
+  name: nginx  
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: headless-svc-demo
+    project: roboshop
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
